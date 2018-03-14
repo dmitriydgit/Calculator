@@ -4,6 +4,7 @@ class Calculator {
     constructor(obj){
         this.DOMs = obj;
         this.result = "";
+        this.temp = 0;
     }
 
     display(event){
@@ -14,12 +15,16 @@ class Calculator {
             return false;
         }
         if(event.target.value === "="){
-            temp = eval(this.result);
-            this.DOMs.display.value = temp;
+            this.temp = eval(this.result);
+            console.log(this.temp);
+           this.DOMs.display.value = eval(this.temp);
+           this.result = "";
+           event.preventDefault();
             return false;
         }
-        this.DOMs.display.value += event.target.value;
+        this.DOMs.display.value = "";
         this.result +=  event.target.value;
+        this.DOMs.display.value += event.target.value;
 
 
         

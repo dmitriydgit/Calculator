@@ -9,6 +9,9 @@ class Calculator {
 
     display(event){
         let temp = 0;
+        if(event.target === this.DOMs.display) {
+            return false;
+        }
         if(event.target.value === "AC" ){
             this.DOMs.display.value = "";
             this.result = "";
@@ -16,13 +19,19 @@ class Calculator {
         }
         if(event.target.value === "="){
             this.temp = eval(this.result);
+            if(this.temp == "undefined"){
+                return false;
+            }
             console.log(this.temp);
-           this.DOMs.display.value = eval(this.temp);
-           this.result = "";
-           event.preventDefault();
+            this.DOMs.display.value = this.temp;
+            this.result = this.temp;
+            event.preventDefault();
             return false;
         }
-        this.DOMs.display.value = "";
+        
+
+
+        //this.DOMs.display.value = "";
         this.result +=  event.target.value;
         this.DOMs.display.value += event.target.value;
 

@@ -1,5 +1,7 @@
 "use strict";
 
+
+document.addEventListener("DOMContentLoaded", function() {
 class Calculator {
     constructor(obj){
         this.DOMs = obj;
@@ -33,7 +35,8 @@ class Calculator {
 
         //this.DOMs.display.value = "";
         this.result +=  event.target.value;
-        this.DOMs.display.value += event.target.value;
+				this.DOMs.display.value += event.target.value;
+				
 
 
         
@@ -44,17 +47,25 @@ class Calculator {
     }
     
     initListeners(){
-        this.DOMs.calc.addEventListener("click", this.display.bind(this));
-
+			document.addEventListener('keypress', function(eventObject) {
+				if (!(((eventObject.which >= 48) && 
+					(eventObject.which <= 57)) 
+					|| (eventObject.which == 32)
+					|| (eventObject.which == 8)
+					|| (eventObject.which == 45) 
+					|| (eventObject.which == 40) 
+					|| (eventObject.which == 41) 
+					|| (eventObject.which == 43))) {
+					eventObject.preventDefault();
+				}
+				// var str = $("#phone").val();
+			});
+			
+			this.DOMs.calc.addEventListener("click", this.display.bind(this));
+			this.DOMs.display.focus();
     }
     
-    /*
-    get (){
-        console.log(this.DOMs.equally);
-    }
-    */
-
-
+    
 }
 let calculator = new Calculator({
     calc : document.querySelector("#calculator-body"),
@@ -82,12 +93,14 @@ let calculator = new Calculator({
     
     
 })    
-console.log(calculator);
+
 calculator.initListeners();
 
 
-console.log(calculator);
-console.log(calculator.result);
+// console.log(calculator);
+// console.log(calculator.result);
 /*
 let equally = document.querySelector("#equally");
 console.log(equally)*/
+
+}); // END DocReady
